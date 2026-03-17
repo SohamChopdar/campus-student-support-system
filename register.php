@@ -12,36 +12,55 @@ if(isset($_POST['register'])){
             VALUES ('$name', '$email', '$password')";
 
     if(mysqli_query($conn, $sql)){
-        echo "Registration successful!";
+    header("Location: login.php");
+    exit();
     } else {
         echo "Error: " . mysqli_error($conn);
     }
 }
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Student Registration</title>
-</head>
-<body>
+<?php include "../includes/header.php"; ?>
 
-<h2>Student Registration</h2>
+<div class="row justify-content-center">
+<div class="col-md-5">
+
+<div class="card">
+<div class="card-header text-center">
+<h4>Student Registration</h4>
+</div>
+
+<div class="card-body">
 
 <form method="POST">
 
-    <label>Name</label><br>
-    <input type="text" name="name" required><br><br>
+<div class="mb-3">
+<label>Name</label>
+<input type="text" name="name" class="form-control" required>
+</div>
 
-    <label>Email</label><br>
-    <input type="email" name="email" required><br><br>
+<div class="mb-3">
+<label>Email</label>
+<input type="email" name="email" class="form-control" required>
+</div>
 
-    <label>Password</label><br>
-    <input type="password" name="password" required><br><br>
+<div class="mb-3">
+<label>Password</label>
+<input type="password" name="password" class="form-control" required>
+</div>
 
-    <button type="submit" name="register">Register</button>
+<button type="submit" name="register" class="btn btn-success w-100">
+Register
+</button>
 
 </form>
 
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
 </body>
 </html>

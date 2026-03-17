@@ -34,27 +34,54 @@ if(isset($_POST['login'])){
 
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-<title>Student Login</title>
-</head>
+<?php include "../includes/header.php"; ?>
 
-<body>
+<div class="row justify-content-center">
+<div class="col-md-4">
 
-<h2>Student Login</h2>
+<div class="card">
+<div class="card-header text-center">
+<h4>Student Login</h4>
+</div>
+
+<div class="card-body">
 
 <form method="POST">
 
-<label>Email</label><br>
-<input type="email" name="email" required><br><br>
+<div class="mb-3">
+<label>Email</label>
+<input type="email" name="email" class="form-control" required>
+</div>
 
-<label>Password</label><br>
-<input type="password" name="password" required><br><br>
+<div class="mb-3">
+<label>Password</label>
+<input type="password" name="password" class="form-control" required>
+</div>
 
-<button type="submit" name="login">Login</button>
+<button type="submit" name="login" class="btn btn-primary w-100">
+Login
+</button>
+
+<div class="text-center mt-3">
+
+<a href="register.php" class="btn btn-outline-primary btn-sm me-2">
+Create Account
+</a>
+
+<a href="../admin/admin_login.php" class="btn btn-outline-dark btn-sm">
+Admin Login
+</a>
+
+</div>
 
 </form>
 
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
 </body>
 </html>
