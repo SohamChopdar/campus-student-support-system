@@ -24,6 +24,10 @@ if(isset($_POST['book_service'])){
 }
 ?>
 
+
+<?php include "../includes/header.php"; ?>
+
+
 <h2>Welcome <?php echo $_SESSION['name']; ?>!</h2>
 <h3>Available Services</h3>
 <?php
@@ -33,25 +37,44 @@ $result = mysqli_query($conn, $sql);
 
 if(mysqli_num_rows($result) > 0){
 
-    while($service = mysqli_fetch_assoc($result)){
+echo "<div class='row'>";
+
+while($service = mysqli_fetch_assoc($result)){
         
-        echo "<div>";
-        echo "<h4>".$service['service_name']."</h4>";
-        echo "<p>".$service['description']."</p>";
+echo "<div class='col-md-4 mb-3'>";
 
-        echo "<form method='POST'>";
-        echo "<input type='hidden' name='service_id' value='".$service['service_id']."'>";
-        echo "<button type='submit' name='book_service'>Book Service</button>";
-        echo "</form>";
+echo "<div class='card h-100'>";
 
-        echo "</div>";
-        echo "<hr>";
-    }
+echo "<div class='card-body'>";
+
+echo "<h5 class='card-title'>".$service['service_name']."</h5>";
+echo "<p class='card-text'>".$service['description']."</p>";
+
+echo "<form method='POST'>";
+echo "<input type='hidden' name='service_id' value='".$service['service_id']."'>";
+
+echo "<button type='submit' name='book_service' class='btn btn-primary'>
+Book Service
+</button>";
+
+echo "</form>";
+
+echo "</div>";
+echo "</div>";
+
+echo "</div>";
+
+}
+
+echo "</div>";
 
 }else{
-    echo "No services available.";
+echo "No services available.";
 }
 
 ?>
 
-<a href="logout.php">Logout</a>
+
+</div>
+</body>
+</html>
