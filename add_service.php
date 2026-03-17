@@ -2,15 +2,6 @@
 session_start();
 include "../config/db.php";
 
-if(isset($_POST['delete_service'])){
-
-    $service_id = $_POST['service_id'];
-
-    $delete = "DELETE FROM services WHERE service_id='$service_id'";
-
-    mysqli_query($conn, $delete);
-}
-
 if(!isset($_SESSION['admin'])){
     header("Location: admin_login.php");
     exit();
@@ -25,34 +16,62 @@ if(isset($_POST['add_service'])){
             VALUES ('$service_name', '$description')";
 
     if(mysqli_query($conn, $sql)){
-        echo "Service added successfully!";
+        echo "<div class='alert alert-success'>Service added successfully!</div>";
     } else {
-        echo "Error adding service.";
+        echo "<div class='alert alert-danger'>Error adding service.</div>";
     }
+}
+
+if(isset($_POST['delete_service'])){
+
+    $service_id = $_POST['service_id'];
+
+    $delete = "DELETE FROM services WHERE service_id='$service_id'";
+
+    mysqli_query($conn, $delete);
 }
 ?>
 
-<h2>Add New Service</h2>
+<?php include "../includes/admin_header.php"; ?>
+
+<div class="row justify-content-center">
+<div class="col-md-6">
+
+<div class="card mb-4 shadow">
+
+<div class="card-header">
+<h4>Add New Service</h4>
+</div>
+
+<div class="card-body">
 
 <form method="POST">
 
-<label>Service Name</label><br>
-<input type="text" name="service_name" required><br><br>
+<div class="mb-3">
+<label>Service Name</label>
+<input type="text" name="service_name" class="form-control" required>
+</div>
 
-<label>Description</label><br>
-<textarea name="description" required></textarea><br><br>
+<div class="mb-3">
+<label>Description</label>
+<textarea name="description" class="form-control" required></textarea>
+</div>
 
-<button type="submit" name="add_service">Add Service</button>
+<button type="submit" name="add_service" class="btn btn-primary">
+Add Service
+</button>
 
 </form>
 
-<br>
+</div>
+</div>
 
-<a href="admin_dashboard.php">Back to Dashboard</a>
+</div>
+</div>
 
-<h3>Existing Services</h3>
+<h4 class="mb-3">Existing Services</h4>
 
-<table border="1" cellpadding="10">
+<table class="table table-striped table-bordered table-hover">
 
 <tr>
 <th>Service Name</th>
@@ -74,7 +93,9 @@ while($row = mysqli_fetch_assoc($result)){
     echo "<td>
     <form method='POST'>
     <input type='hidden' name='service_id' value='".$row['service_id']."'>
-    <button type='submit' name='delete_service'>Delete</button>
+    <button type='submit' name='delete_service' class='btn btn-danger btn-sm'>
+    Delete
+    </button>
     </form>
     </td>";
 
@@ -84,3 +105,7 @@ while($row = mysqli_fetch_assoc($result)){
 ?>
 
 </table>
+
+</div>
+</body>
+</html>

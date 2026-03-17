@@ -17,9 +17,13 @@ $sql = "SELECT bookings.booking_date, bookings.status, services.service_name
 $result = mysqli_query($conn, $sql);
 ?>
 
+
+<?php include "../includes/header.php"; ?>
+
+
 <h2>My Bookings</h2>
 
-<table border="1" cellpadding="10">
+<table class="table table-striped table-bordered">
 <tr>
     <th>Service</th>
     <th>Booking Date</th>
@@ -48,4 +52,7 @@ if(mysqli_num_rows($result) > 0){
 
 <br>
 
-<a href="dashboard.php">Back to Dashboard</a>
+
+</div>
+</body>
+</html>
